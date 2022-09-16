@@ -17,8 +17,8 @@ CXX?=g++
 CXXFLAGS?=-O3 -g
 LDFLAGS?=
 # required
-RE2_CXXFLAGS?=-pthread -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -I. $(CCICU) $(CCPCRE)
-RE2_LDFLAGS?=-pthread $(LDICU) $(LDPCRE)
+RE2_CXXFLAGS?=-Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -I. $(CCICU) $(CCPCRE)
+RE2_LDFLAGS?=$(LDICU) $(LDPCRE)
 AR?=ar
 ARFLAGS?=rsc
 NM?=nm
