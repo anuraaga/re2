@@ -32,9 +32,12 @@ typedef SRWLOCK MutexType;
 #include <pthread.h>
 #include <stdlib.h>
 typedef pthread_rwlock_t MutexType;
-#else
+#elif !defined(_LIBCPP_HAS_NO_THREADS)
 #include <shared_mutex>
 typedef std::shared_mutex MutexType;
+#else
+#define MUTEX_IS_NOOP
+typedef void* MutexType;
 #endif
 
 namespace re2 {
@@ -88,6 +91,15 @@ void Mutex::ReaderLock()   { SAFE_PTHREAD(pthread_rwlock_rdlock(&mutex_)); }
 void Mutex::ReaderUnlock() { SAFE_PTHREAD(pthread_rwlock_unlock(&mutex_)); }
 
 #undef SAFE_PTHREAD
+
+#elif defined(MUTEX_IS_NOOP)
+
+Mutex::Mutex()             { }
+Mutex::~Mutex()            { }
+void Mutex::Lock()         { }
+void Mutex::Unlock()       { }
+void Mutex::ReaderLock()   { }
+void Mutex::ReaderUnlock() { }
 
 #else
 
