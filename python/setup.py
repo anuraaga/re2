@@ -183,11 +183,11 @@ try:
           'Intended Audience :: Developers',
           'License :: OSI Approved :: BSD License',
           'Programming Language :: C++',
-          'Programming Language :: Python :: 3.10',
+          'Programming Language :: Python :: 3.11',
       ],
       options=options(),
       cmdclass={'build_ext': BuildExt},
-      python_requires='~=3.10',
+      python_requires='~=3.11',
   )
 except:
   raise
